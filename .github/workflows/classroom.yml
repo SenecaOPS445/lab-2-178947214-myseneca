@@ -1,0 +1,90 @@
+name: Autograding Tests
+'on':
+- workflow_dispatch
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: lab2a
+      id: lab2a
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: lab2a
+        setup-command: ''
+        command: python3 ./CheckLab2.py -f -v lab2a
+        timeout: 10
+        max-score: 1
+    - name: lab2b
+      id: lab2b
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: lab2b
+        setup-command: ''
+        command: python3 ./CheckLab2.py -f -v lab2b
+        timeout: 10
+        max-score: 1
+    - name: lab2c
+      id: lab2c
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: lab2c
+        setup-command: ''
+        command: python3 ./CheckLab2.py -f -v lab2c
+        timeout: 10
+        max-score: 1
+    - name: lab2d
+      id: lab2d
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: lab2d
+        setup-command: ''
+        command: python3 ./CheckLab2.py -f -v lab2d
+        timeout: 10
+        max-score: 1
+    - name: lab2e
+      id: lab2e
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: lab2e
+        setup-command: ''
+        command: python3 ./CheckLab2.py -f -v lab2e
+        timeout: 10
+        max-score: 1
+    - name: lab2f
+      id: lab2f
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: lab2f
+        setup-command: ''
+        command: python3 ./CheckLab2.py -f -v lab2f
+        timeout: 10
+        max-score: 1
+    - name: lab2g
+      id: lab2g
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: lab2g
+        setup-command: ''
+        command: python3 ./CheckLab2.py -f -v lab2g
+        timeout: 10
+        max-score: 1
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        LAB2A_RESULTS: "${{steps.lab2a.outputs.result}}"
+        LAB2B_RESULTS: "${{steps.lab2b.outputs.result}}"
+        LAB2C_RESULTS: "${{steps.lab2c.outputs.result}}"
+        LAB2D_RESULTS: "${{steps.lab2d.outputs.result}}"
+        LAB2E_RESULTS: "${{steps.lab2e.outputs.result}}"
+        LAB2F_RESULTS: "${{steps.lab2f.outputs.result}}"
+        LAB2G_RESULTS: "${{steps.lab2g.outputs.result}}"
+      with:
+        runners: lab2a,lab2b,lab2c,lab2d,lab2e,lab2f,lab2g
