@@ -1,0 +1,1 @@
+bash: ./CheckLab2.py: Permission denied
